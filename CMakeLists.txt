@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.18)
+project(glauber_cpp VERSION 0.1.0 LANGUAGES CXX)
+add_executable(glauber-pbpb src/main.cpp)
+set_target_properties(glauber-pbpb PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS OFF)
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+  target_compile_options(glauber-pbpb PRIVATE -Wall -Wextra -Wpedantic)
+endif()

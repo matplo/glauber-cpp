@@ -1,0 +1,665 @@
+{
+  "native": {
+    "schema": "glauber-pbpb-v1",
+    "system": "Pb208-Pb208",
+    "profile": "Pbpnrw, continuous placement",
+    "rng": "mt19937_64",
+    "seed": 72913,
+    "trials": 60000,
+    "inelastic_events": 36598,
+    "sigma_nn_inelastic_mb": 67.6,
+    "sigma_pbpb_inelastic_barn": 7.66506719574,
+    "sigma_pbpb_inelastic_se_barn": 0.0250229295016,
+    "proton_radius_fm": 6.68,
+    "proton_diffuseness_fm": 0.447,
+    "neutron_radius_fm": 6.69,
+    "neutron_diffuseness_fm": 0.56,
+    "radial_reweight_divisor_coefficients": [
+      1.00866,
+      -0.000461484,
+      -0.000203571
+    ],
+    "radial_cutoff_fm": 14,
+    "radial_grid_intervals": 4096,
+    "min_nucleon_separation_fm": 0.4,
+    "max_pre_recenter_shift_fm": 0.1,
+    "max_impact_parameter_fm": 20,
+    "centrality_bin_width_pct": 5,
+    "centrality_definition": "impact-parameter quantiles of accepted inelastic events",
+    "taa_definition": "Ncoll divided by sigma_nn_inelastic_mb",
+    "events_sha256": "ea9cda25f1657b9896e42a0a1abb15966fc12a375f7b56f347feb0410c20294b"
+  },
+  "reference": {
+    "root_version": "6.40.04",
+    "trials": 60000,
+    "inelastic_events": 36533,
+    "seeds": [
+      72921,
+      72922,
+      72923,
+      72924
+    ],
+    "events_sha256": {
+      "reference-shard-1.csv": "87840170bab79c8ad204673e67f6deafdcbad9dc33966767b9d6cd2e0748480f",
+      "reference-shard-2.csv": "87c5933d40b33bcf07c9d201a1ec5f00bc664ea7530cca168693f602a9bc8b9b",
+      "reference-shard-3.csv": "d6ee279effad171003368aa5ee5438503126a718fd30234160eb25af383536ed",
+      "reference-shard-4.csv": "24990d7894bfad7b2b861cf35b772a94c2a2302b82b70a127b07056bc4b5fd94"
+    },
+    "source_sha256": {
+      "tglaubermc.hh": "e7b282e932f1e3591cf4a60f36db42bf662797b337de45c476b8ed23b9237e51",
+      "tglaubermc.cxx": "8b2a53bcd30c18b4dd1e0c6e6f15d79604007a36521537f25b35c0df788a2c5d"
+    }
+  },
+  "method": "Independent inelastic impact-parameter quantiles. Recompute bin boundaries and means in each of 20 delete-one-block jackknife replicates. Compare with combined Monte Carlo standard errors and a four-standard-error threshold. The 100% endpoint is fixed by the proposal.",
+  "sigma_pbpb_inelastic_barn": {
+    "native": 7.665067195738616,
+    "reference": 7.651453627573061,
+    "native_se": 0.025022929501569143,
+    "reference_se": 0.02503539474682629,
+    "pull": 0.3846012111707762,
+    "passed": true
+  },
+  "bins": [
+    {
+      "centrality_percent": [
+        0,
+        5
+      ],
+      "b_high_fm": {
+        "native": 3.5078496541549997,
+        "reference": 3.467210173605,
+        "native_se": 0.03222694339778643,
+        "reference_se": 0.03664321012099789,
+        "pull": 0.8328005930376734,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 384.1186440677966,
+        "reference": 384.18674698795184,
+        "native_se": 0.6082547727909715,
+        "reference_se": 0.8789406775916352,
+        "pull": -0.06371410961700265,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 26.022748227925504,
+        "reference": 26.028746508357262,
+        "native_se": 0.07468556325453109,
+        "reference_se": 0.08840025007146031,
+        "pull": -0.05183168520982098,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        5,
+        10
+      ],
+      "b_high_fm": {
+        "native": 4.9592314774799995,
+        "reference": 4.914568424225,
+        "native_se": 0.03127667090379162,
+        "reference_se": 0.04082865009233148,
+        "pull": 0.868397228340929,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 329.76284153005463,
+        "reference": 331.6874657909141,
+        "native_se": 1.178866770971519,
+        "reference_se": 1.262200323776001,
+        "pull": -1.114367193452542,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 20.273256377922205,
+        "reference": 20.463656590977546,
+        "native_se": 0.11148184282073553,
+        "reference_se": 0.13285282119170183,
+        "pull": -1.0978485251313903,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        10,
+        15
+      ],
+      "b_high_fm": {
+        "native": 6.052791243045,
+        "reference": 6.0381946563749995,
+        "native_se": 0.02778227559986494,
+        "reference_se": 0.029786871539069986,
+        "pull": 0.35835493169449356,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 281.7770491803279,
+        "reference": 283.23767798466594,
+        "native_se": 1.1482520933616946,
+        "reference_se": 1.5261782484141415,
+        "pull": -0.7647687451534594,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 15.947359912050961,
+        "reference": 16.151974762957156,
+        "native_se": 0.09498121336360993,
+        "reference_se": 0.1259715912435687,
+        "pull": -1.2969472845326562,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        15,
+        20
+      ],
+      "b_high_fm": {
+        "native": 6.965948545694999,
+        "reference": 7.01628255844,
+        "native_se": 0.032427383080115744,
+        "reference_se": 0.03657022664044994,
+        "pull": -1.0298193695445759,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 241.1087431693989,
+        "reference": 240.41488779419814,
+        "native_se": 1.2618478843042373,
+        "reference_se": 1.6424154098581107,
+        "pull": 0.33500479148507256,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 12.689583535422123,
+        "reference": 12.593583104193184,
+        "native_se": 0.09332262036541464,
+        "reference_se": 0.13489017017860164,
+        "pull": 0.5852763393338712,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        20,
+        25
+      ],
+      "b_high_fm": {
+        "native": 7.807898616255001,
+        "reference": 7.83192539215,
+        "native_se": 0.026943159696561202,
+        "reference_se": 0.03491462078581989,
+        "pull": -0.5448031965988892,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 203.96775956284154,
+        "reference": 202.50738916256157,
+        "native_se": 1.3441273447716287,
+        "reference_se": 1.4041011988373484,
+        "pull": 0.7513145265044517,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 9.876159989653054,
+        "reference": 9.76927287272115,
+        "native_se": 0.09867797228284005,
+        "reference_se": 0.09166599299122678,
+        "pull": 0.7936093277882635,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        25,
+        30
+      ],
+      "b_high_fm": {
+        "native": 8.535266347135,
+        "reference": 8.572218894959999,
+        "native_se": 0.03782771467113593,
+        "reference_se": 0.0443702444066688,
+        "pull": -0.6337631605076495,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 171.66775956284152,
+        "reference": 170.23603504928806,
+        "native_se": 1.2668984762797948,
+        "reference_se": 1.7030036647761269,
+        "pull": 0.674527806311939,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 7.6409933068192855,
+        "reference": 7.511706319630323,
+        "native_se": 0.08001638763055494,
+        "reference_se": 0.10599650062620666,
+        "pull": 0.973490276384556,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        30,
+        35
+      ],
+      "b_high_fm": {
+        "native": 9.231492250485001,
+        "reference": 9.261250019075,
+        "native_se": 0.026736123502673258,
+        "reference_se": 0.03740494915865642,
+        "pull": -0.6472215260448255,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 142.84699453551912,
+        "reference": 142.49315818281335,
+        "native_se": 1.5209940705460017,
+        "reference_se": 1.2895768498406608,
+        "pull": 0.1774417049230386,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 5.813714553626282,
+        "reference": 5.7512234302685235,
+        "native_se": 0.09910731131986363,
+        "reference_se": 0.08459544015348636,
+        "pull": 0.4795863170429639,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        35,
+        40
+      ],
+      "b_high_fm": {
+        "native": 9.880034412675,
+        "reference": 9.89261293411,
+        "native_se": 0.02882539207921171,
+        "reference_se": 0.025425330146388325,
+        "pull": -0.32725613854423363,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 117.975956284153,
+        "reference": 117.42036124794745,
+        "native_se": 1.107459530786086,
+        "reference_se": 1.2420271437280819,
+        "pull": 0.33387906686181346,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 4.341610890160702,
+        "reference": 4.31666035114311,
+        "native_se": 0.06089279621133831,
+        "reference_se": 0.06587106097321271,
+        "pull": 0.2781408896143539,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        40,
+        45
+      ],
+      "b_high_fm": {
+        "native": 10.46159589675,
+        "reference": 10.468816280350001,
+        "native_se": 0.027587775309842077,
+        "reference_se": 0.029870079194978912,
+        "pull": -0.1775756944597889,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 96.11584699453552,
+        "reference": 96.19386637458926,
+        "native_se": 0.8502611069601199,
+        "reference_se": 1.0001927088057374,
+        "pull": -0.059431726381654,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 3.1878779060367965,
+        "reference": 3.171497177521274,
+        "native_se": 0.05008890199405709,
+        "reference_se": 0.055146531653790416,
+        "pull": 0.21987974878252833,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        45,
+        50
+      ],
+      "b_high_fm": {
+        "native": 11.042327083850001,
+        "reference": 11.0526604652,
+        "native_se": 0.032308947456978904,
+        "reference_se": 0.023223048525019087,
+        "pull": -0.2597033636807578,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 77.3464480874317,
+        "reference": 77.04707170224411,
+        "native_se": 0.8974024800772105,
+        "reference_se": 0.9434322126683041,
+        "pull": 0.2299227899114113,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 2.294257444951014,
+        "reference": 2.283685221351004,
+        "native_se": 0.0347934627685321,
+        "reference_se": 0.03935069410474304,
+        "pull": 0.20127303523101409,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        50,
+        55
+      ],
+      "b_high_fm": {
+        "native": 11.5816539115,
+        "reference": 11.60801935195,
+        "native_se": 0.02914304089937729,
+        "reference_se": 0.026698575776222415,
+        "pull": -0.6670775665358012,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 61.01093493712411,
+        "reference": 60.35796387520526,
+        "native_se": 0.7837285205593991,
+        "reference_se": 0.6465240676058529,
+        "pull": 0.6426980884781733,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 1.5982073820531153,
+        "reference": 1.5758445798233598,
+        "native_se": 0.0338900810568189,
+        "reference_se": 0.026485200573197826,
+        "pull": 0.5199241071087172,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        55,
+        60
+      ],
+      "b_high_fm": {
+        "native": 12.09507681045,
+        "reference": 12.103345870950001,
+        "native_se": 0.03230223365288514,
+        "reference_se": 0.02454562263998024,
+        "pull": -0.20382223469804922,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 46.86939890710382,
+        "reference": 46.80339539978094,
+        "native_se": 0.7595478212606543,
+        "reference_se": 0.6509942130678864,
+        "pull": 0.06598020860479453,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 1.0972047078604457,
+        "reference": 1.0856740571754473,
+        "native_se": 0.02556434347458537,
+        "reference_se": 0.021017537221668808,
+        "pull": 0.3484116900812582,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        60,
+        65
+      ],
+      "b_high_fm": {
+        "native": 12.58396485455,
+        "reference": 12.5870838165,
+        "native_se": 0.02628829505554902,
+        "reference_se": 0.01712314205475758,
+        "pull": -0.09941491128790579,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 36.21967213114754,
+        "reference": 35.41543513957307,
+        "native_se": 0.6618056050928602,
+        "reference_se": 0.41891386003319,
+        "pull": 1.0267990071238144,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 0.7490623080156498,
+        "reference": 0.725912755090474,
+        "native_se": 0.020704720641655776,
+        "reference_se": 0.01500104765158538,
+        "pull": 0.9054151476884478,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        65,
+        70
+      ],
+      "b_high_fm": {
+        "native": 13.05262416775,
+        "reference": 13.08032798765,
+        "native_se": 0.023960835811969287,
+        "reference_se": 0.02062658272612834,
+        "pull": -0.8762568068212275,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 26.153005464480874,
+        "reference": 26.489326765188835,
+        "native_se": 0.6956012632042239,
+        "reference_se": 0.4854343882508499,
+        "pull": -0.39649403884108597,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 0.4747631519384357,
+        "reference": 0.4866677678348766,
+        "native_se": 0.01651224369524094,
+        "reference_se": 0.011295954953262785,
+        "pull": -0.59504279831651,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        70,
+        75
+      ],
+      "b_high_fm": {
+        "native": 13.5162634177,
+        "reference": 13.531716346749999,
+        "native_se": 0.023206855565337626,
+        "reference_se": 0.015975967030518512,
+        "pull": -0.5484765823486791,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 18.380327868852458,
+        "reference": 18.193318729463307,
+        "native_se": 0.2850948147149414,
+        "reference_se": 0.33914073149416896,
+        "pull": 0.4220925353596068,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 0.2985498108448928,
+        "reference": 0.29245545927659,
+        "native_se": 0.005330879596082016,
+        "reference_se": 0.0076987570435637686,
+        "pull": 0.6508105812376015,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        75,
+        80
+      ],
+      "b_high_fm": {
+        "native": 13.954930123,
+        "reference": 13.96214342115,
+        "native_se": 0.01901005854623909,
+        "reference_se": 0.016671526974013983,
+        "pull": -0.28528176449602793,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 13.140983606557377,
+        "reference": 13.081554460864806,
+        "native_se": 0.38281362802839924,
+        "reference_se": 0.1900107484391151,
+        "pull": 0.1390558368208054,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 0.1929462928832412,
+        "reference": 0.18995961303653613,
+        "native_se": 0.006842267463508673,
+        "reference_se": 0.003827304840038783,
+        "pull": 0.3809562735485018,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        80,
+        85
+      ],
+      "b_high_fm": {
+        "native": 14.41647461865,
+        "reference": 14.4218029976,
+        "native_se": 0.02357827249706752,
+        "reference_se": 0.019271258647510753,
+        "pull": -0.17497707275954894,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 9.165027322404372,
+        "reference": 9.171866447728517,
+        "native_se": 0.1970577404473482,
+        "reference_se": 0.16004590122188622,
+        "pull": -0.02694021665438264,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 0.1196688977269053,
+        "reference": 0.12103943801556535,
+        "native_se": 0.003014452722993569,
+        "reference_se": 0.0027862664432166595,
+        "pull": -0.3338790741111025,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        85,
+        90
+      ],
+      "b_high_fm": {
+        "native": 14.935730586350001,
+        "reference": 14.92258787155,
+        "native_se": 0.0182564418948202,
+        "reference_se": 0.011519246478121147,
+        "pull": 0.6088305751262657,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 6.4,
+        "reference": 6.325301204819277,
+        "native_se": 0.14208157885709513,
+        "reference_se": 0.1279828892560488,
+        "pull": 0.39063409707683044,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 0.07689882626830925,
+        "reference": 0.07500145822666676,
+        "native_se": 0.0021911433383969207,
+        "reference_se": 0.0018934378029211933,
+        "pull": 0.6551919657184061,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        90,
+        95
+      ],
+      "b_high_fm": {
+        "native": 15.58679226345,
+        "reference": 15.61247348785,
+        "native_se": 0.029435789931863583,
+        "reference_se": 0.017590191629085605,
+        "pull": -0.748917740718204,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 4.5109289617486334,
+        "reference": 4.53639846743295,
+        "native_se": 0.10022716915070631,
+        "reference_se": 0.09332450432829699,
+        "pull": -0.18597843024419655,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 0.04917224431726324,
+        "reference": 0.04973069959807361,
+        "native_se": 0.0014073241896375122,
+        "reference_se": 0.0012755009295990708,
+        "pull": -0.2940271263164854,
+        "passed": true
+      }
+    },
+    {
+      "centrality_percent": [
+        95,
+        100
+      ],
+      "b_high_fm": {
+        "native": 20,
+        "reference": 20,
+        "native_se": 0.0,
+        "reference_se": 0.0,
+        "pull": null,
+        "passed": true
+      },
+      "npart_mean": {
+        "native": 3.091803278688525,
+        "reference": 3.1029009304871376,
+        "native_se": 0.042227784553508924,
+        "reference_se": 0.04678078848323928,
+        "pull": -0.17609491470320324,
+        "passed": true
+      },
+      "taa_mean_mb_inverse": {
+        "native": 0.029949558638083233,
+        "reference": 0.02995825276992386,
+        "native_se": 0.000572856961130811,
+        "reference_se": 0.0006815411175900158,
+        "pull": -0.009765215251537436,
+        "passed": true
+      }
+    }
+  ],
+  "passed": true
+}
