@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A ROOT-free Monte Carlo Glauber model for Pb–Pb geometry, with LHC 5.02 TeV plots and a statistical comparison against TGlauberMC.">
+<title>glauber-cpp | Pb–Pb collision geometry</title>
+<style>
+  :root{color-scheme:light;--ink:#172638;--navy:#0e1c2c;--muted:#4c5c70;--accent:#0a667b;--line:#d6e0e9;--surface:#f2f6f9}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#fff;color:var(--ink);font:1rem/1.65 "Inter",system-ui,-apple-system,sans-serif}
+  a{color:var(--accent);text-underline-offset:.2em}
+  a:focus-visible{outline:3px solid #1487a0;outline-offset:4px}
+  a:hover{text-decoration-thickness:2px}
+  .wrap{width:min(1120px,calc(100% - 3rem));margin-inline:auto}
+  .masthead{background:var(--navy);color:#f5f8fc}
+  .nav{display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-block:1.15rem;border-bottom:1px solid #314358}
+  .brand{font:700 1.1rem ui-monospace,monospace;letter-spacing:-.025em}
+  .nav ul{display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap;list-style:none;padding:0;margin:0}
+  .nav a,.masthead a{color:#abebf1}
+  .intro{padding:4rem 0 3.25rem;max-width:850px}
+  h1,h2,h3,p{margin-top:0}
+  h1{font-size:clamp(3rem,8vw,6rem);letter-spacing:-.07em;line-height:1;margin-bottom:.8rem}
+  .subtitle{font-size:clamp(1.25rem,3vw,1.8rem);line-height:1.35;max-width:34ch;margin-bottom:1.35rem}
+  .citation{border-left:3px solid #5dd6e1;padding-left:1rem;max-width:72ch;margin:.95rem 0 0}
+  .citation p{margin:0 0 .4rem}
+  main section{padding:3.25rem 0;border-bottom:1px solid var(--line)}
+  h2{font-size:clamp(1.8rem,4.5vw,2.6rem);letter-spacing:-.045em;line-height:1.14}
+  h3{font-size:1.12rem;line-height:1.35;margin-bottom:.55rem}
+  .prose{max-width:75ch}
+  figcaption{color:var(--muted)}
+  .install{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:2rem;align-items:start}
+  pre{background:var(--navy);color:#ecf7fa;border-radius:.65rem;padding:1.2rem;line-height:1.65;overflow-wrap:anywhere;white-space:pre-wrap;margin:0}
+  code{font: .9em ui-monospace,SFMono-Regular,Consolas,monospace}
+  p code,li code{background:var(--surface);padding:.13em .32em;border-radius:.25rem}
+  figure{margin:1.65rem 0 0}
+  figure img{max-width:100%;height:auto;display:block;margin-inline:auto}
+  .framed{background:#fff;border:1px solid var(--line);border-radius:.65rem;padding:clamp(.35rem,2vw,1.15rem)}
+  figcaption{margin-top:.75rem}
+  .metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:1.5rem 0;background:var(--surface);border-radius:.6rem;padding:1rem 1.2rem;gap:1rem}
+  .metrics dt{font-size:.93rem;color:var(--muted)}
+  .metrics dd{margin:0;font-weight:700;font-size:1.5rem;font-variant-numeric:tabular-nums}
+  footer{padding:1.25rem 0 2.25rem;color:var(--muted)}
+  @media(max-width:740px){
+    .wrap{width:min(100% - 1.5rem,1120px)}
+    .intro{padding:2.4rem 0}
+    main section{padding:2.4rem 0}
+    .install{grid-template-columns:minmax(0,1fr);gap:.8rem}
+    .metrics{padding:.8rem;gap:.55rem}
+    .metrics dd{font-size:1.15rem}
+  }
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <nav class="nav" aria-label="Project">
+      <span class="brand">glauber-cpp</span>
+      <ul>
+        <li><a href="#geometry">Geometry</a></li>
+        <li><a href="#validation">Validation</a></li>
+        <li><a href="#run">Run</a></li>
+        <li><a href="#jewel">Python and JEWEL</a></li>
+        <li><a href="https://github.com/matplo/glauber-cpp">GitHub</a></li>
+      </ul>
+    </nav>
+    <div class="intro">
+      <h1>glauber-cpp</h1>
+      <p class="subtitle">Monte Carlo Glauber geometry for Pb–Pb collisions in standalone C++17.</p>
+      <div class="citation">
+        <p><strong>Glauber model reference</strong></p>
+        <p>C. Loizides, J. Kamin and D. d’Enterria,
+          <a href="https://doi.org/10.1103/PhysRevC.97.054910">“Improved Monte Carlo Glauber predictions at present and future nuclear colliders”</a>,
+          <cite>Phys. Rev. C</cite> 97, 054910 (2018).</p>
+      </div>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <section id="geometry">
+    <h2>Pb–Pb geometry at the LHC</h2>
+    <p class="prose">The generator uses the Pbpnrw proton and neutron profiles
+      with continuous nucleon placement. It proposes impact parameters uniformly
+      in transverse area and retains collisions with at least one inelastic
+      nucleon pair. Ranking the accepted collisions by impact parameter defines
+      the centrality classes used here.</p>
+    <dl class="metrics">
+      <div><dt>Collision energy</dt><dd>5.02 TeV</dd></div>
+      <div><dt>Inelastic events</dt><dd>36,598</dd></div>
+      <div><dt>Inelastic NN cross section</dt><dd>67.6 mb</dd></div>
+    </dl>
+    <figure class="framed">
+      <a href="figures/pbpb-geometry.png"><img src="figures/pbpb-geometry.png" width="1755" height="705"
+           alt="Minimum-bias and binary-collision-weighted impact parameter distributions, with a heatmap of binary collisions versus participant nucleons."></a>
+      <figcaption>The shaded region marks 0–10% centrality. Weighting each
+        event by its binary collision count favors smaller impact parameters.
+        Each impact-parameter curve is normalized over the full inelastic sample.</figcaption>
+    </figure>
+    <p class="prose">In the 0–10% class, the mean impact parameter is 3.308 fm in
+      the minimum-bias rows and 3.140 fm after binary-collision weighting.
+      The minimum-bias class mean nuclear overlap is
+      &lang;<i>T</i><sub>AA</sub>&rang; = 23.147 ± 0.057 mb<sup>−1</sup>,
+      using the fixed-bin Monte Carlo standard error.</p>
+  </section>
+
+  <section id="validation">
+    <h2>Comparison with TGlauberMC</h2>
+    <p class="prose">Each implementation drew 60,000 proposals using independent
+      seeds and the same collision settings. Glauber C++ accepted 36,598
+      inelastic events and TGlauberMC v3.2 accepted 36,533. The tests rerank
+      each sample independently and recalculate the centrality boundaries in
+      jackknife replicates.</p>
+    <figure class="framed">
+      <a href="figures/pbpb-validation.png"><img src="figures/pbpb-validation.png" width="2010" height="690" loading="lazy"
+           alt="Mean participant count and nuclear overlap by centrality for both generators, with pulls for the b boundaries and class means."></a>
+      <figcaption>All 20 centrality bins passed the four-standard-error
+        criterion. The largest absolute pull was 1.30 for
+        &lang;<i>T</i><sub>AA</sub>&rang;. The error bars account for Monte Carlo
+        statistics in the reference check.</figcaption>
+    </figure>
+    <p class="prose">The total inelastic Pb–Pb cross sections were
+      7.665 ± 0.025 b (C++) and 7.651 ± 0.025 b (TGlauberMC).
+      <a href="https://github.com/matplo/glauber-cpp/blob/main/validation/pbpb-5020.json">Full validation results</a> ·
+      <a href="https://github.com/matplo/glauber-cpp/blob/main/validation/plot.py">Figure script</a></p>
+  </section>
+
+  <section id="run">
+    <h2>Generate a Pb–Pb sample</h2>
+    <div class="install">
+      <div>
+        <pre><code>cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+build/glauber-pbpb pbpb-5020 60000 72913</code></pre>
+      </div>
+      <div>
+        <p>Build from a checkout with a C++17 compiler and CMake.
+          The generator uses the standard library. ROOT is used only
+          for the independent TGlauberMC comparison.</p>
+        <p>The output directory contains individual events, a centrality
+          table, and the run configuration. Download the reference
+          <a href="https://raw.githubusercontent.com/matplo/glauber-cpp/8875c38d8a904fce5456bd5bed15c396b0d44916/validation/native-run/events.csv">event CSV</a>,
+          <a href="https://raw.githubusercontent.com/matplo/glauber-cpp/8875c38d8a904fce5456bd5bed15c396b0d44916/validation/native-run/centrality.csv">centrality CSV</a>,
+          or <a href="https://raw.githubusercontent.com/matplo/glauber-cpp/8875c38d8a904fce5456bd5bed15c396b0d44916/validation/native-run/metadata.json">metadata</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="jewel">
+    <h2>Use the geometry in Python and JEWEL</h2>
+    <p class="prose">Read the CSV tables directly in Python, or launch the
+      standalone executable with <code>subprocess.run</code> to generate a new
+      sample. The JEWEL C++ runner consumes the same event table through
+      <code>--centrality 0 10 --glauber-events path/to/events.csv</code>.
+      It samples the hard-event impact parameter in proportion to
+      <i>N</i><sub>coll</sub>. For inclusive jet yield normalization, JEWEL
+      uses the separate minimum-bias class mean
+      &lang;<i>T</i><sub>AA</sub>&rang;.</p>
+    <p class="prose">Glauber event generation is currently exposed through
+      the <code>glauber-pbpb</code> executable. The <code>jewel_cpp</code>
+      Python interface generates hadronized JEWEL events at a configured
+      impact parameter.</p>
+    <p><a href="https://matplo.github.io/jewel-cpp/#geometry">JEWEL geometry notebook and plots</a> ·
+      <a href="https://matplo.github.io/jewel-cpp/glauber-raa-validation.html">Glauber-weighted jet R<sub>AA</sub></a></p>
+  </section>
+</main>
+<footer class="wrap">
+  <p><a href="https://github.com/matplo/glauber-cpp">Source and build instructions</a> ·
+    <a href="https://github.com/matplo/TGlauberMC">TGlauberMC reference implementation</a></p>
+</footer>
+</body>
+</html>

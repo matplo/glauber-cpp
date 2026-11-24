@@ -2,6 +2,8 @@
 
 A standalone C++17 Monte Carlo Glauber generator for minimum-bias Pb-208 collisions. Build and run it with CMake and the C++ standard library. The implementation follows the published model and the documented Pbpnrw parameters.
 
+[Project documentation, Pb–Pb figures, and validation](https://matplo.github.io/glauber-cpp/)
+
 ## Run
 
 ```sh
