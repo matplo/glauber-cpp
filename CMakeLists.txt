@@ -5,3 +5,9 @@ set_target_properties(glauber-pbpb PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUI
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
   target_compile_options(glauber-pbpb PRIVATE -Wall -Wextra -Wpedantic)
 endif()
+
+if(DEFINED SKBUILD_SCRIPTS_DIR)
+  install(TARGETS glauber-pbpb RUNTIME DESTINATION "${SKBUILD_SCRIPTS_DIR}")
+else()
+  install(TARGETS glauber-pbpb RUNTIME DESTINATION bin)
+endif()
