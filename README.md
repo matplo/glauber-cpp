@@ -1,22 +1,37 @@
 # Glauber C++ for Pb–Pb
 
-A standalone C++17 Monte Carlo Glauber generator for minimum-bias Pb-208 collisions. Build and run it with CMake and the C++ standard library. The implementation follows the published model and the documented Pbpnrw parameters.
+A standalone C++17 Monte Carlo Glauber generator for minimum-bias Pb-208 collisions. The `glauber-pbpb` command is available through the hepyy pip package. The implementation follows the published model and the documented Pbpnrw parameters.
 
 [Project documentation, Pb–Pb figures, and validation](https://matplo.github.io/glauber-cpp/)
 
-## Run
+## Install and generate Pb–Pb CSV
+
+In an activated Python environment, install the CLI and generate a sample:
+
+```sh
+pip install 'hepyy[glauber-cpp]'
+glauber-pbpb pbpb-5020 6000 72913
+```
+
+The published wheels support macOS arm64, macOS Intel, and Linux x86_64.
+
+The arguments are a new output directory, the number of impact-parameter proposals, and an unsigned random seed. Optional fourth and fifth arguments set the inelastic nucleon–nucleon cross section in mb and the centrality bin width in percent. The defaults are 67.6 mb at 5.02 TeV and 5%-wide bins. The bin width must divide 100. Repeat runs with the same executable and seed give the same sample.
+
+- `pbpb-5020/events.csv` records inelastic events ordered by impact parameter, with proposal index, `b`, `N_part`, `N_coll`, event `T_AA`, and centrality class.
+- `pbpb-5020/centrality.csv` records the boundaries and class means. Its `T_AA` standard errors hold the estimated boundaries fixed.
+- `pbpb-5020/metadata.json` records the model settings, seed, trial counts and hadronic Pb–Pb cross section estimate. It is written after the CSV files close successfully.
+
+### CMake fallback
+
+From the repository checkout, build with CMake and a C++17 compiler:
 
 ```sh
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build
-build/glauber-pbpb pbpb-5020 60000 72913
+build/glauber-pbpb pbpb-5020 6000 72913
 ```
 
-The arguments are a new output directory, the number of impact-parameter proposals, and an unsigned random seed. Optional fourth and fifth arguments set the inelastic nucleon–nucleon cross section in mb and the centrality bin width in percent. The defaults are 67.6 mb at 5.02 TeV and 5%-wide bins. The bin width must divide 100. Repeat runs with the same executable and seed give the same sample.
-
-- `events.csv` records inelastic events ordered by impact parameter, with proposal index, `b`, `N_part`, `N_coll`, event `T_AA`, and centrality class.
-- `centrality.csv` records the boundaries and class means. Its `T_AA` standard errors hold the estimated boundaries fixed.
-- `metadata.json` records the model settings, seed, trial counts and hadronic Pb–Pb cross section estimate. It is written after the CSV files close successfully.
+## Geometry and centrality
 
 Proposals sample uniformly in transverse area out to 20 fm. The generator accepts an event if at least one pair meets the inelastic hard-sphere criterion. It assigns percentile classes by ranking accepted events in `b`. Thus the classes represent impact-parameter centrality. `T_AA = N_coll / sigma_NN_inelastic` is in inverse mb. The first and last `b` boundaries are the proposal limits.
 
@@ -32,10 +47,16 @@ for i in 1 2 3 4; do
 done
 ```
 
-From the source checkout, with paths adjusted to the reference working directory:
+Generate the 60,000-proposal native sample used for this check:
 
 ```sh
-python3 validation/compare.py pbpb-5020 \
+glauber-pbpb pbpb-validation 60000 72913
+```
+
+Run the comparison from the source checkout with the reference paths adjusted:
+
+```sh
+python3 validation/compare.py pbpb-validation \
   --reference /path/to/reference/reference-shard-{1,2,3,4}.csv \
   --reference-trials-per-file 15000 --reference-seeds 72921 72922 72923 72924 \
   --reference-source /path/to/reference/tglaubermc.{hh,cxx} \

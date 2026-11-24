@@ -34,6 +34,9 @@
   pre{background:var(--navy);color:#ecf7fa;border-radius:.65rem;padding:1.2rem;line-height:1.65;overflow-wrap:anywhere;white-space:pre-wrap;margin:0}
   code{font: .9em ui-monospace,SFMono-Regular,Consolas,monospace}
   p code,li code{background:var(--surface);padding:.13em .32em;border-radius:.25rem}
+  details{margin-top:1.3rem;max-width:75ch}
+  summary{cursor:pointer;font-weight:700}
+  details p{margin-top:.65rem}
   figure{margin:1.65rem 0 0}
   figure img{max-width:100%;height:auto;display:block;margin-inline:auto}
   .framed{background:#fff;border:1px solid var(--line);border-radius:.65rem;padding:clamp(.35rem,2vw,1.15rem)}
@@ -59,9 +62,9 @@
     <nav class="nav" aria-label="Project">
       <span class="brand">glauber-cpp</span>
       <ul>
+        <li><a href="#run">Install and run</a></li>
         <li><a href="#geometry">Geometry</a></li>
         <li><a href="#validation">Validation</a></li>
-        <li><a href="#run">Run</a></li>
         <li><a href="#jewel">Python and JEWEL</a></li>
         <li><a href="https://github.com/matplo/glauber-cpp">GitHub</a></li>
       </ul>
@@ -79,6 +82,37 @@
   </div>
 </header>
 <main class="wrap">
+  <section id="run">
+    <h2>Install and generate a Pb–Pb sample</h2>
+    <div class="install">
+      <div>
+        <p>In an activated Python environment, install the CLI from PyPI.
+          Wheels are available for macOS arm64, macOS Intel, and Linux x86_64.</p>
+        <pre><code>pip install 'hepyy[glauber-cpp]'
+glauber-pbpb pbpb-5020 6000 72913</code></pre>
+      </div>
+      <div>
+        <p>The command uses 6,000 proposals and seed 72913. It writes
+          <code>pbpb-5020/events.csv</code>, <code>centrality.csv</code>,
+          and <code>metadata.json</code> under the new output directory.
+          The defaults are 67.6 mb at 5.02 TeV and 5% centrality bins.</p>
+        <p>Download the validated
+          <a href="https://raw.githubusercontent.com/matplo/glauber-cpp/8875c38d8a904fce5456bd5bed15c396b0d44916/validation/native-run/events.csv">event CSV</a>,
+          <a href="https://raw.githubusercontent.com/matplo/glauber-cpp/8875c38d8a904fce5456bd5bed15c396b0d44916/validation/native-run/centrality.csv">centrality CSV</a>,
+          or <a href="https://raw.githubusercontent.com/matplo/glauber-cpp/8875c38d8a904fce5456bd5bed15c396b0d44916/validation/native-run/metadata.json">metadata</a>.</p>
+      </div>
+    </div>
+    <details>
+      <summary>CMake fallback</summary>
+      <p>Build from the repository checkout with CMake and a C++17 compiler.
+        The generator uses the C++ standard library. ROOT is used for the
+        independent TGlauberMC comparison.</p>
+      <pre><code>cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+build/glauber-pbpb pbpb-5020 6000 72913</code></pre>
+    </details>
+  </section>
+
   <section id="geometry">
     <h2>Pb–Pb geometry at the LHC</h2>
     <p class="prose">The generator uses the Pbpnrw proton and neutron profiles
@@ -124,27 +158,6 @@
       7.665 ± 0.025 b (C++) and 7.651 ± 0.025 b (TGlauberMC).
       <a href="https://github.com/matplo/glauber-cpp/blob/main/validation/pbpb-5020.json">Full validation results</a> ·
       <a href="https://github.com/matplo/glauber-cpp/blob/main/validation/plot.py">Figure script</a></p>
-  </section>
-
-  <section id="run">
-    <h2>Generate a Pb–Pb sample</h2>
-    <div class="install">
-      <div>
-        <pre><code>cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build
-build/glauber-pbpb pbpb-5020 60000 72913</code></pre>
-      </div>
-      <div>
-        <p>Build from a checkout with a C++17 compiler and CMake.
-          The generator uses the standard library. ROOT is used only
-          for the independent TGlauberMC comparison.</p>
-        <p>The output directory contains individual events, a centrality
-          table, and the run configuration. Download the reference
-          <a href="https://raw.githubusercontent.com/matplo/glauber-cpp/8875c38d8a904fce5456bd5bed15c396b0d44916/validation/native-run/events.csv">event CSV</a>,
-          <a href="https://raw.githubusercontent.com/matplo/glauber-cpp/8875c38d8a904fce5456bd5bed15c396b0d44916/validation/native-run/centrality.csv">centrality CSV</a>,
-          or <a href="https://raw.githubusercontent.com/matplo/glauber-cpp/8875c38d8a904fce5456bd5bed15c396b0d44916/validation/native-run/metadata.json">metadata</a>.</p>
-      </div>
-    </div>
   </section>
 
   <section id="jewel">
